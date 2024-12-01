@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Products</title>
+    <!-- Inclure vos styles ici -->
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .btn-delete {
+            color: white;
+            background-color: red;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        .btn-delete:hover {
+            background-color: darkred;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <!-- Inclure le header -->
+    <%- include('partials/header.ejs') %>
+</header>
+
+<h1>All Products</h1>
+
+<!-- Message de succès après suppression -->
+<% if (deleteSuccesMessage) { %>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong><%= deleteSuccesMessage %></strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<% } %>
+
+<!-- Message d'erreur après suppression -->
+<% if (deleteErroMessage) { %>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong><%= deleteErroMessage %></strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<% } %>
+
+<!-- Tableau des produits -->
+<% if (products.length > 0) { %> 
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Image</th>
+                <th>Delete</th>
+                <th>Uptade</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% products.forEach(function(product) { %>
+                <tr>
+                    <td><%= product.name %></td>
+                    <td>$<%= product.price %></td>
+                    <td><img src="<%= product.imageUrl %>" alt="<%= product.name %>" width="100"></td>
+                    <td>
+                        <form action="/delete-product/<%= product._id %>" method="POST" style="display:inline;">
+                            <button type="submit" class="btn-delete">Delete</button>
+                        </form>
+                    </td>
+                    <td> 
+                        <form action="/update-product/<% product._id %>" method="post">
+                            <a href="/update/<%= product._id %>" style="text-decoration: none;background-color: green;color: #fff; padding: 7px;">Uptade</a>
+                        </form>
+                </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+<% } else { %>
+    <p>No products available.</p>
+<% } %>
+
+
+
+</body>
+</html>

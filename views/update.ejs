@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mettre à jour le produit</title>
+</head>
+<body>
+    <h1>Mettre à jour le produit : <%= product.name %></h1>
+    <form action="/update-product/<%= product._id %>" method="POST">
+        <label for="name">Nom du produit</label>
+        <input type="text" id="name" name="name" value="<%= product.name %>" required>
+        
+        <label for="price">Prix</label>
+        <input type="number" id="price" name="price" value="<%= product.price %>" required>
+        <label for="price">Url Image</label>
+        <input type="text" id="image" name="imageUrl" value="<%= product.imageUrl %>" required>
+
+        <button type="submit">Mettre à jour</button>
+    </form>
+</body>
+</html>

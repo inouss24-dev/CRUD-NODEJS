@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<header>
+    <%- include('partials/header.ejs') %>
+  </header>
+<body>
+    <% if (successMessage) { %>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong><%= successMessage %></strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <% } %>
+    
+    <% if (errorMessage) { %>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong><%= errorMessage %></strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <% } %>
+  <form action="add" method="post">
+    <h1>Nouveau Produit</h1>
+    <pre>
+      <label for="">Nom du produit</label>
+      <input type="text" name="name"><br>
+      <label for="">Prix Du Produit</label>
+      <input type="text" name="price"><br>
+      <label for="">Lien De L'image</label>
+      <input type="text" name="imageUrl"><br>
+      <button type="submit">ENREGISTER</button>
+
+    </pre>
+  </form>
+</body>
+</html>
